@@ -1,0 +1,273 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Ruda:wght@400;600;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #c9d6ff;
+  background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+  font-family: "poppins", sans-serif;
+}
+.container {
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  width: 768px;
+  max-width: 100%;
+  min-height: 480px;
+  overflow: hidden;
+  position: relative;
+}
+.container p {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+  margin: 20px 0;
+}
+.container span {
+  font-size: 12px;
+}
+.container a {
+  text-decoration: none;
+  color: #333;
+  margin: 15px 0 10px;
+  font-size: 13px;
+}
+.container form {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  height: 100%;
+}
+.container form input {
+  background-color: #eee;
+  border: none;
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px 15px;
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+  border-radius: 8px;
+  font-family: inherit;
+}
+.container button {
+  background-color: #6e64ed;
+  color: #fff;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.container button.hidden {
+  background-color: transparent;
+  border-color: #fff;
+}
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+.social_icons {
+  margin: 20px 0;
+}
+.social_icons a {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 3px;
+  width: 40px;
+  height: 40px;
+}
+.sign-in {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+.container.active .sign-in {
+  transform: translateX(100%);
+}
+.sign-up {
+  left: 0;
+  width: 50%;
+  z-index: 1;
+  opacity: 0;
+}
+.container.active .sign-up {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: move 0.6;
+}
+@keyframes move {
+  0%,
+  49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%,
+  100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+.toggle-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.6s ease-in-out;
+  z-index: 100;
+}
+.container.active .toggle-container {
+  transform: translateX(-100%);
+}
+.toggle {
+  background: url('https://img.freepik.com/free-psd/clock-illustration_23-2150602175.jpg?size=626&ext=jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+  color: #fff;
+  left: -100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: all 0.6s ease-in-out;
+  position: relative;
+}
+.toggle::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.container.active .toggle {
+  transform: translateX(50%);
+}
+.toggle-panel {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px;
+  top: 0;
+  transform: translateX(0);
+  transition: all 0.6s ease-in-out;
+}
+.toggle-left {
+  transform: translateX(-200%);
+}
+.container.active .toggle-left {
+  transform: translateX(0);
+}
+.toggle-right {
+  right: 0;
+  transform: translateX(0);
+}
+.container.active .toggle-right {
+  transform: translateX(0);
+}
+
+/* Include Font Awesome (adjust path as needed) */
+/* Include Font Awesome (adjust path as needed) */
+
+.messages {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.alert {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  animation: slideInUp 0.3s ease-in-out forwards; /* Slide-in animation */
+}
+
+.alert-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.alert-info {
+  color: #007bff;
+  background-color: #d7effa;
+  border-color: #bce8f1;
+}
+
+.alert-warning {
+  color: #ffc107;
+  background-color: #fdf3cd;
+  border-color: #fceec8;
+}
+
+.alert-error {
+  color: #dc3545;
+  background-color: #f2dede;
+  border-color: #e4b9b9;
+}
+
+.alert i {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Optional: Gradient Backgrounds */
+.alert-success {
+  background-image: linear-gradient(to right, #dff0d8 0%, #c0ebc2 100%);
+}
+
+.alert-info {
+  background-image: linear-gradient(to right, #d7effa 0%, #b2d7fa 100%);
+}
+
+.alert-warning {
+  background-image: linear-gradient(to right, #fdf3cd 0%, #fce5b6 100%);
+}
+
+.alert-error {
+  background-image: linear-gradient(to right, #f2dede 0%, #e3bec2 100%);
+}

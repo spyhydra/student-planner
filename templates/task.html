@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Management Dashboard UI</title>
+    <link rel="stylesheet" href="../static/css/task.css" />
+  </head>
+  <body>
+    <div class="task-manager">
+      <!-- left bar starts -->
+<div class="left-bar">
+  <div class="upper-part">
+    <div class="actions">
+      <div class="circle"></div>
+      <div class="circle-2"></div>
+    </div>
+  </div>
+
+  <!-- left content starts -->
+  <div class="left-content">
+    <ul class="action-list">
+      <li class="item">
+        <img class="feather feather-inbox" src="svg/inbox.svg" alt="" />
+        <span>Inbox</span>
+      </li>
+      <li class="item">
+        <img class="feather feather-star" src="svg/star.svg" alt="" />
+        <span> Today</span>
+      </li>
+      <li class="item">
+        <img class="feather feather-calendar" src="svg/calender.svg" alt="" />
+        <span>Upcoming</span>
+      </li>
+      <li class="item">
+        <img class="feather feather-hash" src="svg/hash.svg" alt="" />
+        <span>Important</span>
+      </li>
+      <li class="item">
+        <img class="feather feather-users" src="svg/users.svg" alt="" />
+        <span>Meetings</span>
+      </li>
+      <li class="item">
+        <img class="feather feather-trash" src="svg/trash.svg" alt="" />
+        <span>Trash</span>
+      </li>
+    </ul>
+
+    <ul class="category-list">
+      <li class="item">
+        <img class="feather feather-users" src="svg/users.svg" alt="" />
+        <span>Family</span>
+      </li>
+      <li class="item">
+        <img class="feather feather-sun" src="svg/sun.svg" alt="" />
+        <span>Vacation</span>
+      </li>
+      <li class="item">
+        <img class="feather feather-trending-up" src="svg/trending.svg" alt="" />
+        <span>Festival</span>
+      </li>
+      <li class="item">
+        <img class="feather feather-zap" src="svg/zap.svg" alt="" />
+        <span>Concerts</span>
+      </li>
+    </ul>
+  </div>
+  <!-- left content ends -->
+</div>
+<!-- left bar ends -->
+<!-- page content starts -->
+<div class="page-content">
+  <div class="header">Today Tasks</div>
+  <!-- contnet categories starts -->
+  <div class="content-categories">
+    <div class="label-wrapper">
+      <input class="nav-item" name="nav" type="radio" id="opt-1" />
+      <label class="category" for="opt-1">All</label>
+    </div>
+    <div class="label-wrapper">
+      <input class="nav-item" name="nav" type="radio" id="opt-2" checked />
+      <label class="category" for="opt-2">Important</label>
+    </div>
+    <div class="label-wrapper">
+      <input class="nav-item" name="nav" type="radio" id="opt-3" />
+      <label class="category" for="opt-3">
+  <a href="/add-task">Add Task</a>
+</label>
+
+    </div>
+    <div class="label-wrapper">
+      <input class="nav-item" name="nav" type="radio" id="opt-4" />
+      <label class="category" for="opt-4">Priority</label>
+    </div>
+  </div>
+  <!--  -->
+  <!-- contemt categories ends -->
+  <!-- tasks wrapper starts -->
+
+  <div class="tasks-wrapper">
+ {% for task in tasks %}
+
+    <div class="task">
+<!--      <input class="task-item" name="task" type="checkbox" id="item-1"  />-->
+      <label for=>
+        <span class="label-text">{{ task.title }}</span>
+      </label>
+      <span class="tag approved">{{ task.get_priority_display }} </span>
+    </div>
+
+
+ {% endfor %}
+
+  </div>
+
+  <!-- tasks wrapper ends -->
+</div>
+
+    </div>
+
+  </body>
+</html>

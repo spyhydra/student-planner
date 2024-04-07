@@ -1,26 +1,119 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Add Task</title>
+  <meta charset="UTF-8">
+  <title>Add Task</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    form {
+      margin-bottom: 40px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 12px 20px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .high-priority {
+      background-color: #f9b2b2; /* Light red for high priority */
+      color: #600000; /* Dark red text */
+    }
+
+    .low-priority {
+      background-color: #b2f2b2; /* Light green for low priority */
+      color: #006000; /* Dark green text */
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+  </style>
 </head>
 <body>
-    <h2>Add Task</h2>
+  <div class="container">
+    <h1>Add Task</h1>
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Add Task</button>
-    </form>
-<div>
-    
-<h2>Task List</h2>
-    <ul>
-        {% for task in tasks %}
-            <li>{{ task.title }} - {{ task.description }} - Priority: {{ task.priority }}</li>
-        {% empty %}
-            <li>No tasks available.</li>
-        {% endfor %}
-    </ul>
+      {% csrf_token %}
+      <label for="title">Task Title:</label>
+      <input type="text" id="title" name="title" required>
 
-</div>
+      <label for="priority">Priority:</label>
+      <select name="priority" id="priority" required>
+        <option value="L">Low</option>
+        <option value="M">Medium</option>
+        <option value="H">High</option>
+      </select>
+
+      <input type="submit" value="Add Task">
+    </form>
+
+<!--    <h2>Tasks</h2>-->
+<!--    <ul>-->
+<!--      {% for task in tasks %}-->
+<!--        <li class="{{ task.priority|lower }}"> {{ task.title }} - {{ task.get_priority_display }}</li>-->
+<!--      {% endfor %}-->
+<!--    </ul>-->
+  </div>
 </body>
 </html>

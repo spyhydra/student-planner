@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib import messages
 from ..models import User, Task
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 
 
 def signup_view(request):
@@ -41,4 +41,16 @@ def login_view(request):
     return render(request, 'login.html', {'form': form})
 
 
+def add_and_show_tasks(request: HttpRequest) -> HttpResponse:
+    if request.method == "POST":
+        title = request.POST.get("title")
+        priority = request.POST.get("priority")
+        Task.objects.create(title=title, priority=priority)
 
+
+    return render(request, "add_task.html")
+
+
+def show_tasks(request: HttpRequest) -> HttpResponse:
+    tasks = Task.objects.all()
+    return render(request, "task.html", {"tasks": tasks})

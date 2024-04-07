@@ -6,3 +6,15 @@ class User(models.Model):
     name = models.CharField(max_length=50,)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=59)
+
+class Task(models.Model):
+    PRIORITY_CHOICES = [
+        ('L', 'Low'),
+        ('M', 'Medium'),
+        ('H', 'High'),
+    ]
+    title = models.CharField(max_length=100)
+    priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES)
+
+    def __str__(self):
+        return self.title

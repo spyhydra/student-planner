@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib import messages
-from ..models import User
+from ..models import User, Task
 from django.http import HttpResponse
 
 
@@ -15,7 +15,7 @@ def signup_view(request):
         if form.is_valid():
             print("data entered")
             form.save()
-            messages.success(request,'Your account has been created')
+            messages.success(request, 'Your account has been created')
             return redirect('login')  # Redirect to login page after signup
     else:
         form = SignUpForm()
@@ -32,10 +32,13 @@ def login_view(request):
             user = User.objects.filter(email=email, password=password).first()
             if user:
                 # Login successful
-                messages.success(request,'Logged in successfully')
+                messages.success(request, 'Logged in successfully')
                 return HttpResponse("Login Successful")
             else:
                 messages.error(request, "Invalid credentials")
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
+
+
+

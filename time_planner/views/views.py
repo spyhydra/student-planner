@@ -54,3 +54,6 @@ def add_and_show_tasks(request: HttpRequest) -> HttpResponse:
 def show_tasks(request: HttpRequest) -> HttpResponse:
     tasks = Task.objects.all()
     return render(request, "task.html", {"tasks": tasks})
+
+def dashboard(request: HttpRequest) -> HttpResponse:
+    return render(request, "index.html")

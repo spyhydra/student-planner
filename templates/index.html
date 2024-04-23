@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
-
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/global.css" />
     <link rel="stylesheet" href="../static/css/index.css" />
 
@@ -28,6 +28,8 @@
         src: url("../static/images/public/FontsFree-Net-SFProText-Regular(1).ttf");
         font-weight: 700;
       }
+
+
     </style>
   </head>
   <body>
@@ -339,99 +341,27 @@
                   <h3 class="my-tasks1">My Tasks</h3>
                   <div class="div5">(05)</div>
                 </div>
-                <img
-                  class="iconadd"
-                  loading="lazy"
-                  alt=""
-                  src="../static/images/public/iconadd.svg"
-                />
-              </div>
+                <a href="/add-task">
+                  <img
+                    class="iconadd1"
+                    loading="lazy"
+                    alt=""
+                    src="../static/images/public/iconadd.svg"/>
+
+       </div>
               <div class="cardmissionuncompleted-parent">
+                 {% for task in tasks %}
                 <div class="cardmissionuncompleted">
                   <div class="parent">
-                    <div class="div6">01</div>
+                    <div class="div6">{{forloop.counter}}</div>
                     <div class="leaf-processor">
-                      <div class="create-wireframe">Create Wireframe</div>
+                      <div class="create-wireframe">{{ task.title }}</div>
                     </div>
                   </div>
-                  <img class="icon7" alt="" src="../static/images/public/icon-7.svg" />
+
+
                 </div>
-                <div class="cardmissionuncompletedcomme">
-                  <div class="frame-parent10">
-                    <div class="group">
-                      <div class="div7">02</div>
-                      <div class="create-wireframe-wrapper">
-                        <div class="create-wireframe1">Slack Logo Deisgn</div>
-                      </div>
-                    </div>
-                    <div class="tree-branch">
-                      <div class="pathfinder">
-                        <div class="queue-manager">3</div>
-                        <img
-                          class="iconcomment"
-                          loading="lazy"
-                          alt=""
-                          src="../static/images/public/iconcomment.svg"
-                        />
-                      </div>
-                      <div class="container">
-                        <div class="div8">5</div>
-                        <img
-                          class="iconshare"
-                          alt=""
-                          src="../static/images/public/iconshare.svg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <img class="icon8" alt="" src="../static/images/public/icon-7.svg" />
-                </div>
-                <div class="frame-parent11">
-                  <div class="frame-parent12">
-                    <div class="parent1">
-                      <div class="div9">03</div>
-                      <div class="create-wireframe-container">
-                        <div class="create-wireframe2">Dashboard Design</div>
-                      </div>
-                    </div>
-                    <div class="array-processor">
-                      <div class="linked-list-processor">5</div>
-                      <img
-                        class="iconshare1"
-                        alt=""
-                        src="../static/images/public/iconshare.svg"
-                      />
-                    </div>
-                  </div>
-                  <img class="icon9" alt="" src="../static/images/public/icon-7.svg" />
-                </div>
-                <div class="frame-parent13">
-                  <div class="parent2">
-                    <div class="div10">04</div>
-                    <div class="create-wireframe-frame">
-                      <div class="create-wireframe3">Create Wireframe</div>
-                    </div>
-                  </div>
-                  <img class="icon10" alt="" src="../static/images/public/icon-10.svg" />
-                </div>
-                <div class="reader-parent">
-                  <div class="reader">
-                    <div class="writer">05</div>
-                    <div class="create-wireframe-wrapper1">
-                      <div class="create-wireframe4">Slack Logo Deisgn</div>
-                    </div>
-                  </div>
-                  <img class="icon11" alt="" src="../static/images/public/icon-10.svg" />
-                </div>
-                <div class="frame-parent14">
-                  <div class="parent3">
-                    <div class="div11">06</div>
-                    <div class="data-aggregator">
-                      <div class="create-wireframe5">App Icon Design</div>
-                    </div>
-                  </div>
-                  <img class="icon12" alt="" src="../static/images/public/icon-7.svg" />
-                </div>
+                  {% endfor %}
               </div>
             </div>
             <div class="frame-parent15">
@@ -874,4 +804,17 @@
       </main>
     </div>
   </body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+  $('#dropdownTrigger').click(function(event) {
+    event.preventDefault();
+    var content = $('#dropdownContent');
+    if (content.css('top') === '0%') {
+      content.css('top', '-100%');
+    } else {
+      content.css('top', '0%');
+    }
+  });
+</script>
 </html>

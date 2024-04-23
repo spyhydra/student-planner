@@ -3,17 +3,6 @@
   width: 42px;
   position: relative;
 }
-#dropdownContent {
-  position: fixed;
-  top: -100%;
-  left: 0;
-  right: 0;
-  transition: top 0.3s ease-in-out;
-}
-
-#dropdownContent.show {
-  top: 0;
-}
 .vector-wrapper {
   align-self: stretch;
   display: flex;

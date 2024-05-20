@@ -6,7 +6,34 @@ from .forms import SignUpForm, LoginForm
 from django.contrib import messages
 from ..models import User, Task
 from django.http import HttpResponse, HttpRequest
+from calendar import monthrange, monthcalendar
+from datetime import datetime,timedelta
 
+
+def calendar_view(request, year=datetime.now().year, month=datetime.now().month):
+    # Get current date and calculate first day of the month
+    now = datetime(year, month, 1)
+    first_day = now.weekday()
+
+    # Get month calendar data
+    month_calendar = monthcalendar(year, month)
+
+    # Get events for the month (if using Event model)
+    events = []  # Replace with query to fetch events for the month
+    if Event:
+        events = Event.objects.filter(date__year=year, date__month=month)
+
+    # Prepare context dictionary
+    context = {
+        'year': year,
+        'month': month,
+        'month_name': now.strftime('%B'),
+        'month_calendar': month_calendar,
+        'first_day': first_day,
+        'events': events,  # Add events list if using
+    }
+
+    return render(request, 'calendar_app/calendar.html', context)
 
 def signup_view(request):
     if request.method == 'POST':
@@ -70,8 +97,7 @@ def show_task(request: HttpRequest, id: int) -> HttpResponse:
 
 
 def delete_task(request: HttpRequest, id: int) -> HttpResponse:
-
-        task = Task.objects.get(id=id)
-        print("you deleted id is: ", task)
-        task.delete()
-        return redirect('/show-task/')
+    task = Task.objects.get(id=id)
+    print("you deleted id is: ", task)
+    task.delete()
+    return redirect('/show-task/')

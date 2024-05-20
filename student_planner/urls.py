@@ -11,6 +11,7 @@ urlpatterns = [
     path('task/', views.show_tasks, name='task'),
     path('show-task/', views.show_tasks, name='show-task'),
     path('delete-task/<int:id>', views.delete_task, name='delete-task'),
-    path('', views.dashboard, name='dashboard')
+    path('', views.dashboard, name='dashboard'),
+    path('cal/',views.calendar_view,name='cal')
 
 ]

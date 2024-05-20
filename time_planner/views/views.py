@@ -47,15 +47,31 @@ def add_and_show_tasks(request: HttpRequest) -> HttpResponse:
         priority = request.POST.get("priority")
         Task.objects.create(title=title, priority=priority)
 
-
     return render(request, "add_task.html")
 
 
 def show_tasks(request: HttpRequest) -> HttpResponse:
     tasks = Task.objects.all()
-    return render(request, "task.html", {"tasks": tasks})
+    return render(request, "show_task.html", {"tasks": tasks})
+
 
 def dashboard(request: HttpRequest) -> HttpResponse:
-
     tasks = Task.objects.all()
-    return render(request, "index.html",{ "tasks": tasks})
+    count = Task.objects.count()
+    print("count is: ", count)
+    return render(request, "index.html", {"tasks": tasks})
+
+
+#temp model
+def show_task(request: HttpRequest, id: int) -> HttpResponse:
+    task = Task.objects.get(id=id)
+
+    return render(request, "show_task.html", {"task": task})
+
+
+def delete_task(request: HttpRequest, id: int) -> HttpResponse:
+
+        task = Task.objects.get(id=id)
+        print("you deleted id is: ", task)
+        task.delete()
+        return redirect('/show-task/')

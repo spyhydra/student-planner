@@ -1,48 +1,18 @@
-from django.shortcuts import render
+from pyexpat.errors import messages
 
-# Create your views here.
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, LoginForm
-from django.contrib import messages
-from ..models import User, Task
-from django.http import HttpResponse, HttpRequest
-from calendar import monthrange, monthcalendar
-from datetime import datetime,timedelta
+from ..models import Task, User
 
-
-def calendar_view(request, year=datetime.now().year, month=datetime.now().month):
-    # Get current date and calculate first day of the month
-    now = datetime(year, month, 1)
-    first_day = now.weekday()
-
-    # Get month calendar data
-    month_calendar = monthcalendar(year, month)
-
-    # Get events for the month (if using Event model)
-    events = []  # Replace with query to fetch events for the month
-    if Event:
-        events = Event.objects.filter(date__year=year, date__month=month)
-
-    # Prepare context dictionary
-    context = {
-        'year': year,
-        'month': month,
-        'month_name': now.strftime('%B'),
-        'month_calendar': month_calendar,
-        'first_day': first_day,
-        'events': events,  # Add events list if using
-    }
-
-    return render(request, 'calendar_app/calendar.html', context)
 
 def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
-
         if form.is_valid():
-            print("data entered")
             form.save()
-            messages.success(request, 'Your account has been created')
             return redirect('login')  # Redirect to login page after signup
     else:
         form = SignUpForm()
@@ -50,6 +20,9 @@ def signup_view(request):
 
 
 def login_view(request):
+    user_id = request.session.get('user_id')
+    if user_id is not None:
+        return redirect('/')
     if request.method == 'POST':
         form = LoginForm(request.POST)
 
@@ -58,9 +31,13 @@ def login_view(request):
             password = form.cleaned_data['password']
             user = User.objects.filter(email=email, password=password).first()
             if user:
+
                 # Login successful
-                messages.success(request, 'Logged in successfully')
-                return HttpResponse("Login Successful")
+
+                request.session['user_id'] = user.id
+                print("user id", user.id)
+                render(request, 'index.html', {'user': user})
+                return redirect('/')
             else:
                 messages.error(request, "Invalid credentials")
     else:
@@ -68,36 +45,63 @@ def login_view(request):
     return render(request, 'login.html', {'form': form})
 
 
-def add_and_show_tasks(request: HttpRequest) -> HttpResponse:
-    if request.method == "POST":
-        title = request.POST.get("title")
-        priority = request.POST.get("priority")
-        Task.objects.create(title=title, priority=priority)
+def add_and_show_tasks(request):
+    user_id = request.session.get('user_id')
+    if user_id is not None:
+        user = User.objects.get(pk=user_id)
+        if request.method == "POST":
+            title = request.POST.get("title")
+            priority = request.POST.get("priority")
+            Task.objects.create(title=title, priority=priority, user=user)
 
-    return render(request, "add_task.html")
+        tasks = Task.objects.filter(user=user)
+        return render(request, "add_task.html", {"tasks": tasks})
+    else:
+        return redirect('login')
 
 
-def show_tasks(request: HttpRequest) -> HttpResponse:
-    tasks = Task.objects.all()
+# def show_tasks(request):
+#     user_id = request.session.get('user.id')
+#     if user_id is not None:
+#         user = User.objects.get(pk=user_id)
+#         tasks = Task.objects.filter(user=user)
+#         return render(request, "show_task.html", {"tasks": tasks})
+#     else:
+#         return redirect('login')
+
+
+def dashboard(request):
+    user_id = request.session.get('user_id')
+    print("enter in dashboard")
+    if user_id is not None:
+        print("user id", user_id)
+        # User is logged in, retrieve user data and display dashboard
+        user = User.objects.get(pk=user_id)
+        tasks = Task.objects.filter(user=user)
+
+        return render(request, "index.html", {"tasks": tasks})
+    else:
+        return redirect('login')
+
+
+def show_tasks(request):
+    print("enter in show task"
+          )
+    user_id = request.session.get('user_id')
+
+    user = User.objects.get(pk=user_id)
+
+    tasks = Task.objects.filter(user=user)  # Get all tasks of the logged in user
+
     return render(request, "show_task.html", {"tasks": tasks})
 
 
-def dashboard(request: HttpRequest) -> HttpResponse:
-    tasks = Task.objects.all()
-    count = Task.objects.count()
-    print("count is: ", count)
-    return render(request, "index.html", {"tasks": tasks})
+def delete_task(request, id):
+    Task.objects.get(pk=id).delete()
+    return redirect('task')
 
 
-#temp model
-def show_task(request: HttpRequest, id: int) -> HttpResponse:
-    task = Task.objects.get(id=id)
 
-    return render(request, "show_task.html", {"task": task})
-
-
-def delete_task(request: HttpRequest, id: int) -> HttpResponse:
-    task = Task.objects.get(id=id)
-    print("you deleted id is: ", task)
-    task.delete()
-    return redirect('/show-task/')
+def logout(request):
+    del request.session['user_id']
+    return redirect('login')

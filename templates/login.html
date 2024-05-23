@@ -33,7 +33,7 @@
 
          
       <div class="form-container sign-up">
-        <form method="post" action="{% url 'signup' %}">
+        <form method="POST" action="{% url 'signup' %}">
              {% csrf_token %}
              
           <h1>Create Account</h1>
@@ -52,7 +52,7 @@
       </div>
 <!--===========Login Form -->
       <div class="form-container sign-in">
-        <form method="post">
+        <form method="POST">
              {% csrf_token %}
              
           <h1>Sign In</h1>

@@ -61,16 +61,7 @@ def add_and_show_tasks(request):
         return redirect('login')
 
 
-# def show_tasks(request):
-#     user_id = request.session.get('user.id')
-#     if user_id is not None:
-#         user = User.objects.get(pk=user_id)
-#         tasks = Task.objects.filter(user=user)
-#         return render(request, "show_task.html", {"tasks": tasks})
-#     else:
-#         return redirect('login')
-
-
+#dashboard view
 def dashboard(request):
     user_id = request.session.get('user_id')
     print("enter in dashboard")
@@ -85,6 +76,7 @@ def dashboard(request):
         return redirect('login')
 
 
+#show the task and show the task
 def show_tasks(request):
     print("enter in show task"
           )
@@ -97,18 +89,21 @@ def show_tasks(request):
     return render(request, "show_task.html", {"tasks": tasks})
 
 
-def delete_task(request, id):
-    Task.objects.get(pk=id).delete()
-    return redirect('task')
-
-
-def logout(request):
-    del request.session['user_id']
-    return redirect('login')
-
-
+#complete task
 def complete_task(request, id):
     task = Task.objects.get(pk=id)
     task.completed = True
     task.save()
     return redirect('task')
+
+
+#delete task
+def delete_task(request, id):
+    Task.objects.get(pk=id).delete()
+    return redirect('task')
+
+#logout the user
+def logout(request):
+    del request.session['user_id']
+    return redirect('login')
+

@@ -51,7 +51,7 @@ MIDDLEWARE = [
 ]
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Database-backed sessions
-SESSION_COOKIE_AGE = 60 * 60 * 24  # 1 day
+SESSION_COOKIE_AGE = 60 * 20 # 20 minutes
 
 ROOT_URLCONF = 'student_planner.urls'
 

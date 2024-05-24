@@ -97,23 +97,19 @@
       {% csrf_token %}
       <label for="title">Task Title:</label>
       <input type="text" id="title" name="title" required>
-
+      <label for="due_date">Due Date:</label>
+      <input type="date" id="due_date" name="due_date" required>
       <label for="priority">Priority:</label>
       <select name="priority" id="priority" required>
-        <option value="L">Low</option>
-        <option value="M">Medium</option>
-        <option value="H">High</option>
+        <option value="Low">Low</option>
+        <option value="Normal">Normal</option>
+        <option value="Urgent">Urgent</option>
       </select>
 
       <input type="submit" value="Add Task">
     </form>
 
-<!--    <h2>Tasks</h2>-->
-<!--    <ul>-->
-<!--      {% for task in tasks %}-->
-<!--        <li class="{{ task.priority|lower }}"> {{ task.title }} - {{ task.get_priority_display }}</li>-->
-<!--      {% endfor %}-->
-<!--    </ul>-->
+
   </div>
 </body>
 </html>

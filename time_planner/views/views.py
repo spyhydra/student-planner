@@ -52,7 +52,8 @@ def add_and_show_tasks(request):
         if request.method == "POST":
             title = request.POST.get("title")
             priority = request.POST.get("priority")
-            Task.objects.create(title=title, priority=priority, user=user)
+            due_date = request.POST.get("due_date")
+            Task.objects.create(title=title, priority=priority, user=user, due_date=due_date)
 
         tasks = Task.objects.filter(user=user)
         return render(request, "add_task.html", {"tasks": tasks})
@@ -101,7 +102,13 @@ def delete_task(request, id):
     return redirect('task')
 
 
-
 def logout(request):
     del request.session['user_id']
     return redirect('login')
+
+
+def complete_task(request, id):
+    task = Task.objects.get(pk=id)
+    task.completed = True
+    task.save()
+    return redirect('task')

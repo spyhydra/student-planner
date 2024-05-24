@@ -13,6 +13,7 @@ urlpatterns = [
     path('delete-task/<int:id>', views.delete_task, name='delete-task'),
     path('', views.dashboard, name='dashboard'),
     path('logout/', views.logout, name='logout'),
+    path('complete-task/<int:id>', views.complete_task, name='complete_task'),
 
 
 ]

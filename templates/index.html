@@ -100,7 +100,7 @@
               <img class="icon5" alt="" src="../static/images/public/icon-5.svg" />
 
               <div class="time-manage-container">
-                <div class="time-manage1">TIME MANAGE</div>
+               <a href="upload"><div class="time-manage1">show files</div></a>
               </div>
             </div>
           </button>
@@ -185,8 +185,8 @@
                 </div>
                 <div class="value-comparator">
                   <div class="task-done">Task Done：</div>
-                  <div class="div">25</div>
-                  <div class="div1">/50</div>
+                  <div class="div">{{ completed_task }}</div>
+                  <div class="div1">/{{count}}</div>
                 </div>
                 <div class="rectangle-parent">
                   <div class="frame-child"></div>
@@ -249,7 +249,7 @@
               <div class="frame-parent9">
                 <div class="my-tasks-parent">
                   <h3 class="my-tasks1">My Tasks</h3>
-                  <div class="div5">(05)</div>
+                  <div class="div5">({{count}})</div>
                 </div>
                 <a href="/add-task">
                   <img

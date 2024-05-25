@@ -1,11 +1,12 @@
 from pyexpat.errors import messages
 
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, LoginForm
-from ..models import Task, User
+from ..models import Task, User, Document
+import os
 
 
 def signup_view(request):
@@ -70,8 +71,9 @@ def dashboard(request):
         # User is logged in, retrieve user data and display dashboard
         user = User.objects.get(pk=user_id)
         tasks = Task.objects.filter(user=user)
-
-        return render(request, "index.html", {"tasks": tasks})
+        count = Task.objects.filter(user=user).count()
+        completed_task = Task.objects.filter(user=user, completed=True).count()
+        return render(request, "index.html", {"tasks": tasks, "count": count, "completed_task": completed_task})
     else:
         return redirect('login')
 
@@ -89,6 +91,40 @@ def show_tasks(request):
     return render(request, "show_task.html", {"tasks": tasks})
 
 
+#upload file
+
+
+def upload_file(request):
+    user_id = request.session.get('user_id')
+    user = User.objects.get(pk=user_id)
+
+    if request.method == 'POST':
+        uploaded_file = request.FILES['document']
+        if uploaded_file is None:
+            messages.error(request, "Please select a file to upload")
+        document = Document(uploaded_file=uploaded_file, user=user)
+        document.save()
+        return redirect('upload')
+    else:
+        documents = Document.objects.filter(user=user)
+        for document in documents:
+            document.filename = os.path.basename(document.uploaded_file.name)
+        return render(request, 'upload.html', {'documents': documents})
+
+
+#download file
+def download_file(request, file_id):
+    document = Document.objects.get(id=file_id)
+    response = FileResponse(document.uploaded_file)
+    return response
+
+
+#delte file
+def delete_file(request, file_id):
+    Document.objects.get(id=file_id).delete()
+    return redirect('upload')
+
+
 #complete task
 def complete_task(request, id):
     task = Task.objects.get(pk=id)
@@ -102,8 +138,8 @@ def delete_task(request, id):
     Task.objects.get(pk=id).delete()
     return redirect('task')
 
+
 #logout the user
 def logout(request):
     del request.session['user_id']
     return redirect('login')
-

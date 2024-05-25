@@ -15,12 +15,18 @@ class Task(models.Model):
         ('M', 'Medium'),
         ('H', 'High'),
     ]
-    id=models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES)
     completed = models.BooleanField(default=False)
     due_date = models.DateField()
 
+
+
     def __str__(self):
         return self.title
+
+class Document(models.Model):
+        uploaded_file = models.FileField(upload_to='documents/')
+        user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -6,6 +6,7 @@
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/global.css" />
     <link rel="stylesheet" href="../static/css/index.css" />
+    <link rel="stylesheet" href="../static/css/nav.css" />
 
     <style>
       @font-face {
@@ -60,17 +61,10 @@
             <div class="icon-group">
               <img class="icon1" alt="" src="../static/images/public/icon-1.svg" />
 
-              <div class="siblings">
-                <div class="projects">PROJECTS</div>
-              </div>
-            </div>
-          </div>
-          <div class="frame-wrapper1">
-            <div class="icon-container">
-              <img class="icon2" alt="" src="../static/images/public/icon-2.svg" />
+
 
               <div class="my-tasks-wrapper">
-                <a href="task">Show Tasks</a>
+                <a href="task"><div class="time-manage1">Show Task</div></a>
 
 
 
@@ -81,26 +75,19 @@
             <div class="icon-parent1">
               <img class="icon3" alt="" src="../static/images/public/icon-3.svg" />
 
-              <div class="calendar-wrapper">
-                <div class="calendar">CALENDAR</div>
-              </div>
-            </div>
-          </div>
-          <div class="frame-wrapper3">
-            <div class="icon-parent2">
-              <img class="icon4" alt="" src="../static/images/public/icon-4.svg" />
+
 
               <div class="time-manage-wrapper">
-                <a href="/logout"><div class="time-manage">Logout</div></a>
+                <a href="/upload"><div class="time-manage1">Files</div></a>
               </div>
             </div>
           </div>
           <button class="frame-button">
             <div class="icon-parent3">
-              <img class="icon5" alt="" src="../static/images/public/icon-5.svg" />
+              <img class="icon5" alt="" src="https://img.icons8.com/ios/50/exit--v1.png" />
 
               <div class="time-manage-container">
-               <a href="upload"><div class="time-manage1">show files</div></a>
+               <a href="/logout"><div class="time-manage1">Logout</div></a>
               </div>
             </div>
           </button>
@@ -126,7 +113,8 @@
           </div>
           <div class="rooted-tree">
             <div class="linked-list">
-              <img class="icontips" alt="" src="../static/images/public/icontips.svg" />
+              <div>hello</div>
+
             </div>
             <img
               class="value-holder-icon"
@@ -655,8 +643,40 @@
               </div>
             </div>
             <div class="frame-parent22">
-              <div class="message-wrapper">
-                <b class="message">Files</b>
+
+                    <div class="frame-parent8">
+              <div class="frame-parent9">
+                <div class="my-tasks-parent">
+                  <h3 class="my-tasks1">Files</h3>
+                  <div class="div5">({{count}})</div>
+                </div>
+                <a href="/upload">
+                  <img
+                    class="iconadd1"
+                    loading="lazy"
+                    alt=""
+                    src="../static/images/public/iconadd.svg"/>
+                </a>
+
+       </div>
+ <div class="cardmissionuncompleted-parent">
+               {% for document in documents %}
+                <div class="cardmissionuncompleted">
+                  <div class="parent">
+                    <div class="div6">{{forloop.counter}}</div>
+                    <div class="leaf-processor">
+                      <div class="create-wireframe">{{ document.filename }}</div>
+                    </div>
+                  </div>
+
+
+                </div>
+                  {% endfor %}
+              </div>
+            </div>
+
+
+
               </div>
 
               </div>

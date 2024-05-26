@@ -65,6 +65,7 @@ def add_and_show_tasks(request):
 #dashboard view
 def dashboard(request):
     user_id = request.session.get('user_id')
+
     print("enter in dashboard")
     if user_id is not None:
         print("user id", user_id)
@@ -73,7 +74,10 @@ def dashboard(request):
         tasks = Task.objects.filter(user=user)
         count = Task.objects.filter(user=user).count()
         completed_task = Task.objects.filter(user=user, completed=True).count()
-        return render(request, "index.html", {"tasks": tasks, "count": count, "completed_task": completed_task})
+        documents = Document.objects.filter(user=user)
+        for document in documents:
+            document.filename = os.path.basename(document.uploaded_file.name)
+        return render(request, "index.html", {"tasks": tasks, "count": count, "completed_task": completed_task, "documents":documents})
     else:
         return redirect('login')
 

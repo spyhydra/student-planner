@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Add Task</title>
+
+  <link rel="stylesheet" href="../static/css/nav.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -91,6 +93,64 @@
   </style>
 </head>
 <body>
+<div id="nav">
+<header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">Logo</a>
+
+            <div class="nav__menu" id="nav-menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="/index" class="nav__link">Dashboard</a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="/add-task" class="nav__link">Add Task</a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="/upload" class="nav__link">Add file</a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="/task" class="nav__link">Show Task</a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="/upload" class="nav__link">Show File</a>
+                  </li>
+               </ul>
+
+               <!-- Close button -->
+               <div class="nav__close" id="nav-close">
+                <a href="/logout"><i class="ri-close-line"></i></a>
+</div>
+            </div>
+
+            <div class="nav__actions">
+               <!-- Search button -->
+
+
+               <!-- Login button -->
+
+
+
+               <!-- Toggle button -->
+               <div class="nav__toggle" id="nav-toggle">
+                  <i class="ri-menu-line"></i>
+               </div>
+            </div>
+         </nav>
+      </header>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
   <div class="container">
     <h1>Add Task</h1>
     <form method="post">

@@ -48,7 +48,7 @@ Setup this project with following Instruction in Windos termainal(windos only)
 1) Python and Django framwork
 2) HTML CSS JS BOOTSTRAP etc
 3) Docker Conatiner 
- 
+  ```
 
 
 
@@ -58,7 +58,7 @@ Setup this project with following Instruction in Windos termainal(windos only)
 - Used Add task 
 - Add Fies as well as Download files
 - Multiuser application
-
+ ```
 
 ## Demo
 

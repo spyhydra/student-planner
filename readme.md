@@ -3,6 +3,19 @@
 
 Welcome to the student-planner project! This Django application empowers students to efficiently manage their academic schedules, assignments, and deadlines.
 
+![Screenshot 2024-06-17 112251](https://github.com/spyhydra/student-planner/assets/49969478/4c24ff31-d10e-4c48-9ef0-04c331692f11)
+
+
+![Screenshot (195)](https://github.com/spyhydra/student-planner/assets/49969478/69d82d8f-04e9-4c10-8fa2-59dbd69348fb)
+
+![Screenshot (192)](https://github.com/spyhydra/student-planner/assets/49969478/7af54b2c-ec92-4e97-a2a7-2950c9ad22d8)
+
+![Screenshot (193)](https://github.com/spyhydra/student-planner/assets/49969478/66ffad29-199e-400b-9b8b-5bdef46a0f13)
+
+![Screenshot (194)](https://github.com/spyhydra/student-planner/assets/49969478/bf9c90a3-1ac9-4eab-bdb4-1215066d86e5)
+
+
+
 
 ## Installation
 

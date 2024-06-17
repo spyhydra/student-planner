@@ -43,17 +43,21 @@ Setup this project with following Instruction in Windos termainal(windos only)
 
  ```
  
-
+## Technology Used
+```bash
+1) Python and Django framwork
+2) HTML CSS JS BOOTSTRAP etc
+3) Docker Conatiner 
  
 
 
 
 ## Features
 
-- Api user can perfrom basic CRUD operations
-- Api route secure By jwt autentication
-- user can filter their task according to complete or pending 
-- Optimise code written so api will be running smoothly 
+- Login singhp facility
+- Used Add task 
+- Add Fies as well as Download files
+- Multiuser application
 
 
 ## Demo
